@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day Mehul 🌹</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+height:100vh;
+background:linear-gradient(-45deg,#590d22,#800f2f,#a4133c,#ff4d6d);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+color:#fff;
+overflow:hidden;
+}
+@keyframes bg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+.container{
+display:flex;
+align-items:center;
+justify-content:center;
+height:100%;
+}
+.step{
+display:none;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(12px);
+border-radius:24px;
+padding:30px;
+width:90%;
+max-width:420px;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.step.active{display:block}
+h1{
+font-family:'Dancing Script',cursive;
+font-size:2.6rem;
+margin-bottom:15px;
+}
+.btn{
+border:none;
+border-radius:50px;
+padding:14px 32px;
+font-size:1rem;
+font-weight:600;
+background:linear-gradient(45deg,#c9184a,#ff4d6d);
+color:#fff;
+cursor:pointer;
+margin-top:20px;
+}
+.big-rose{
+font-size:6rem;
+animation:float 3s ease-in-out infinite;
+cursor:pointer;
+}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+}
+.firework{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+}
+.secret{
+display:none;
+font-size:1.1rem;
+margin-top:20px;
+font-style:italic;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/02/07/audio_6590c29b4e.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<div class="step active" id="s0">
+<div class="big-rose">🌹</div>
+<h1>Hey Mehul</h1>
+<p>I made something special just for you</p>
+<button class="btn" onclick="next(1)">Begin ✨</button>
+</div>
+
+<div class="step" id="s1">
+<h1>Rose Day</h1>
+<p>You make every day bloom beautifully in my life</p>
+<button class="btn" onclick="next(2)">Next ❤️</button>
+</div>
+
+<div class="step" id="s2">
+<h1>A Rose For You</h1>
+<div class="big-rose" onclick="fireworks()">🌹</div>
+<p>Tap the rose</p>
+<button class="btn" onclick="next(3)">Continue 🌹</button>
+</div>
+
+<div class="step" id="s3">
+<h1>Happy Rose Day Mehul 🌹</h1>
+<p>You are my favorite feeling</p>
+<button class="btn" onclick="unlock()">Unlock Secret 💖</button>
+<div class="secret" id="secretMsg">
+I love you more than words can ever explain  
+Forever yours ❤️
+</div>
+</div>
+
+</div>
+
+<script>
+let step=0;
+const music=document.getElementById("bgMusic");
+
+document.body.addEventListener("click",()=>{
+music.play().catch(()=>{})
+},{once:true})
+
+function next(n){
+document.getElementById("s"+step).classList.remove("active")
+step=n
+document.getElementById("s"+step).classList.add("active")
+}
+
+function fireworks(){
+for(let i=0;i<40;i++){
+const f=document.createElement("div")
+f.className="firework"
+f.style.left="50%"
+f.style.top="50%"
+document.body.appendChild(f)
+const x=(Math.random()-.5)*300
+const y=(Math.random()-.5)*300
+f.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:translate(${x}px,${y}px),opacity:0}
+],{duration:1000})
+setTimeout(()=>f.remove(),1000)
+}
+}
+
+function unlock(){
+const pass=prompt("Enter the magic word")
+if(pass && pass.toLowerCase()=="mehul"){
+document.getElementById("secretMsg").style.display="block"
+fireworks()
+}
+}
+</script>
+
+</body>
+</html>
